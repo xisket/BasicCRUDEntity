@@ -1,0 +1,35 @@
+@baseUrl = http://localhost:5050
+@userId = 3
+
+### Create: use the returned id below
+POST {{baseUrl}}/api/employees
+Content-Type: application/json
+
+{"name":"Ana Perez","email":"ana@example.com","department":"HR"}
+
+### List
+GET {{baseUrl}}/api/employees?page=1&pageSize=20
+
+### Get
+GET {{baseUrl}}/api/employees/{{userId}}
+
+### Update
+PUT {{baseUrl}}/api/employees/{{userId}}
+Content-Type: application/json
+
+{"name":"Ana Perez","email":"ana@example.com","department":"People"}
+
+### Validation: 400
+POST {{baseUrl}}/api/employees
+Content-Type: application/json
+
+{"name":"","email":"invalid","department":"HR"}
+
+### Duplicate: 409 (after creating Ana)
+POST {{baseUrl}}/api/employees
+Content-Type: application/json
+
+{"name":"Other","email":"ANA@example.com","department":"HR"}
+
+### Delete
+DELETE {{baseUrl}}/api/employees/{{userId}}
